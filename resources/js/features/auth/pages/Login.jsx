@@ -117,7 +117,7 @@ const Login = ({ className = "", ...props }) => {
 
   const handleRegisterRedirect = () => setMode("register");
   const handleForgotPassword = () => navigate("/forgot-password");
-  const handleSellerRedirect = () => navigate("/seller/login");
+  const handleSellerRedirect = () => navigate("/admin/login");
   const handleSellerSignUp = () =>
     navigate("/seller/register", { state: { source: "login", contactMethod: "phone" } });
   const handleClose = () => navigate(-1);
