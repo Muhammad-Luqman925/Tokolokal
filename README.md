@@ -1,98 +1,77 @@
-# 🛍️ TokoLokal
+# TokoLokal
 
-TokoLokal adalah website e-commerce yang dibangun menggunakan **React** (frontend) dan **Laravel** (backend).  
-Proyek ini dirancang untuk mempermudah proses jual-beli produk lokal dengan tampilan modern, user-friendly, dan sistem manajemen produk yang efisien.
+TokoLokal adalah website e-commerce yang dibangun dengan Laravel (backend + Vite) dan React (frontend) dalam satu proyek monolit. Panel admin menggunakan Filament 3 untuk mengelola produk, pesanan, dan data pengguna.
 
----
+## Fitur Utama
+- Autentikasi pengguna (Sanctum)
+- Manajemen produk + upload gambar
+- Keranjang belanja & checkout
+- Voucher, alamat, metode pembayaran
+- Dashboard admin (Filament) di `/admin`
 
-## 🚀 Fitur Utama
+## Tech Stack
+- Frontend: React, Vite, Tailwind CSS, Axios
+- Backend: Laravel 12, Filament 3, MySQL
+- Auth: Laravel Sanctum
 
-- **Autentikasi Pengguna** — registrasi, login, logout dengan validasi backend.  
-- **Manajemen Produk** — CRUD produk lengkap (nama, gambar, deskripsi, harga, stok, varian).  
-- **Keranjang Belanja (Cart)** — tambah, hapus, dan update item secara real-time.  
-- **Checkout & Transaksi** — sistem checkout dengan konfirmasi dan histori pesanan.  
-- **Dashboard Admin (Filament)** — kelola data produk, pengguna, dan pesanan secara terpusat.  
-- **Responsif & Modern UI** — desain adaptif untuk desktop dan mobile.
-
----
-
-## 🧰 Teknologi yang Digunakan
-
-| Bagian | Teknologi |
-|--------|------------|
-| **Frontend** | React, Vite, Tailwind CSS, Axios |
-| **Backend** | Laravel 11, Filament, MySQL |
-| **Autentikasi** | Laravel Sanctum |
-| **Deployment (opsional)** | Vercel (frontend) & Laravel Forge / VPS (backend) |
-
----
-
-## ⚙️ Instalasi & Setup
-
-### 1. Clone Repository
+## Instalasi & Setup (single codebase)
+1) Clone dan masuk folder
 ```bash
-git clone https://github.com/username/TokoLokal.git
-cd TokoLokal
+git clone <repo-url> Tokolokal
+cd Tokolokal
 ```
-
-### 2. Setup Backend (Laravel)
+2) Instal dependency
 ```bash
-cd backend
 composer install
-cp .env.example .env
+npm install
+```
+3) Konfigurasi env + key
+```bash
+copy .env.example .env   # Windows (atau: cp .env.example .env)
 php artisan key:generate
+```
+4) Atur database di `.env`, lalu migrasi + seed + storage link
+```bash
 php artisan migrate --seed
 php artisan storage:link
-php artisan serve
 ```
-
-### 3. Setup Frontend (React)
+5) Jalankan aplikasi (dua terminal)
 ```bash
-cd frontend
-npm install
-npm run dev
+php artisan serve        # http://127.0.0.1:8000
+npm run dev              # Vite dev server
 ```
 
-Pastikan backend sudah berjalan di `http://127.0.0.1:8000`  
-dan frontend di `http://localhost:5173`
-
----
-
-## 📂 Struktur Direktori
-
+## Struktur Direktori
 ```
-TokoLokal/
-├── backend/               # Laravel API (server)
-│   ├── app/
-│   ├── routes/
-│   ├── database/
-│   └── ...
-├── frontend/              # React client
-│   ├── src/
-│   ├── public/
-│   └── ...
-└── README.md
+.
++- app/                      # Code aplikasi (Controllers, Models, Filament, dll)
+�  +- Filament/              # Halaman/Resources/Widgets admin
+�  +- Http/Controllers/Api   # Endpoint REST API
++- bootstrap/
++- config/
++- database/
+�  +- migrations/            # Skema tabel
+�  +- seeders/               # UserSeeder, Product/Voucher/Order, dll
++- public/
+�  +- storage -> ../storage/app/public  # symlink hasil `storage:link`
++- resources/
+�  +- js/                    # React app (routes, features, components)
+�  +- assets/                # CSS/ikon/gambar statis
++- routes/
+�  +- api.php                # Endpoint API publik
+�  +- web.php                # Route web & login Filament override
++- storage/
++- vendor/
++- artisan
++- composer.json
++- package.json
++- vite.config.js
 ```
 
----
+## Catatan
+- Gambar produk/avatars disimpan pada disk `public`. Pastikan `php artisan storage:link` sudah dijalankan.
+- Filament path panel diset di `app/Providers/Filament/AdminPanelProvider.php` (default `/admin`).
+- Base URL API untuk frontend diatur oleh axios instance `resources/js/core/api/axios.js` (default `http://127.0.0.1:8000/api`).
 
-## 👥 Tim Pengembang
-
-| Nama | Peran | Jobdesk |
-|------|--------|----------|
-| **Muhammad Arifin Dafa** | Frontend Developer | Mengembangkan antarmuka pengguna menggunakan React, integrasi API, dan implementasi komponen dinamis dengan Tailwind. |
-| **Muhammad Luqman** | Backend Developer | Membangun REST API dengan Laravel, mengelola database dan autentikasi, serta integrasi dengan Filament untuk dashboard admin. |
-| **Allya Putri Ditya** | UI/UX Designer | Mendesain tampilan website di Figma, membuat wireframe, user flow, serta memastikan konsistensi visual dan kemudahan navigasi. |
-| **Muhammad Arsy Al-Fahd** | UI/UX Designer | Mengembangkan sistem warna, layout responsif, dan elemen interaktif berbasis user research untuk pengalaman pengguna yang optimal. |
-
----
-
-## 📸 Preview Desain
-
-*(Tambahkan di sini link ke Figma atau screenshot tampilan utama jika sudah ada)*
-
----
-
-## 🧾 Lisensi
-
-Proyek ini berada di bawah lisensi **MIT License** — bebas digunakan dan dimodifikasi dengan tetap mencantumkan kredit kepada pengembang asli.
+## Lisensi
+MIT License.
