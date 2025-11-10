@@ -28,10 +28,10 @@ const Login = ({ className = "", ...props }) => {
   const handleLoginSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
-    const identifier = (formData.get("identifier") || "").trim();
+    const email = (formData.get("email") || "").trim();
     const password = (formData.get("password") || "").trim();
 
-    if (!identifier || !password) {
+    if (!email || !password) {
       alert("Please fill in both fields!");
       return;
     }
@@ -39,8 +39,7 @@ const Login = ({ className = "", ...props }) => {
     try {
       setLoading(true);
       const payload = {
-        email: identifier.includes("@") ? identifier : null,
-        phone_number: identifier.includes("@") ? null : identifier,
+        email,
         password,
       };
 
@@ -79,10 +78,10 @@ const Login = ({ className = "", ...props }) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
     const name = (formData.get("name") || "").trim();
-    const identifier = (formData.get("identifier") || "").trim();
+    const email = (formData.get("email") || "").trim();
     const password = (formData.get("password") || "").trim();
 
-    if (!name || !identifier || !password) {
+    if (!name || !email || !password) {
       alert("Please fill in all fields!");
       return;
     }
@@ -92,8 +91,7 @@ const Login = ({ className = "", ...props }) => {
 
       const payload = {
         name,
-        email: identifier.includes("@") ? identifier : null,
-        phone_number: identifier.includes("@") ? null : identifier,
+        email,
         password,
       };
 
@@ -118,8 +116,7 @@ const Login = ({ className = "", ...props }) => {
   const handleRegisterRedirect = () => setMode("register");
   const handleForgotPassword = () => navigate("/forgot-password");
   const handleSellerRedirect = () => navigate("/admin/login");
-  const handleSellerSignUp = () =>
-    navigate("/seller/register", { state: { source: "login", contactMethod: "phone" } });
+  const handleSellerSignUp = () => navigate("/seller/register");
   const handleClose = () => navigate(-1);
   const handleBackToLogin = () => setMode("login");
 
@@ -164,13 +161,13 @@ const Login = ({ className = "", ...props }) => {
 
             <div className="form-group">
               <label className="form-label" htmlFor="login-identifier">
-                Email or Phone Number
+                Email
               </label>
               <input
                 id="login-identifier"
-                name="identifier"
-                type="text"
-                placeholder="Enter email or phone..."
+                name="email"
+                type="email"
+                placeholder="Enter email..."
                 autoComplete="off"
               />
             </div>
