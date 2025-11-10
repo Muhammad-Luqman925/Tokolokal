@@ -9,6 +9,10 @@ use Illuminate\Validation\ValidationException;
 
 class Login extends \Filament\Pages\Auth\Login
 {
+    public function getHeading(): string
+    {
+        return 'Log In';
+    }
     protected function getForms(): array
     {
         return [

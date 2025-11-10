@@ -2,7 +2,7 @@ import "@/assets/styles/pages/Login.css";
 import { useStore } from "@/core/store";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
-import http from "@/core/api/axios"; // ✅ axios instance global
+import http from "@/core/api/axios";
 
 const illustrationSrc = "/img/Login.png";
 
@@ -15,7 +15,6 @@ const Login = ({ className = "", ...props }) => {
   const location = useLocation();
   const isRegisterMode = mode === "register";
 
-  // ✅ agar mode berubah sesuai navigasi
   useEffect(() => {
     if (location.state?.mode === "register") {
       setMode("register");
@@ -24,10 +23,10 @@ const Login = ({ className = "", ...props }) => {
     }
   }, [location.state]);
 
-  // ✅ LOGIN CUSTOMER
   const handleLoginSubmit = async (event) => {
     event.preventDefault();
-    const formData = new FormData(event.currentTarget);
+    const form = event.currentTarget;
+    const formData = new FormData(form);
     const email = (formData.get("email") || "").trim();
     const password = (formData.get("password") || "").trim();
 
@@ -38,15 +37,10 @@ const Login = ({ className = "", ...props }) => {
 
     try {
       setLoading(true);
-      const payload = {
-        email,
-        password,
-      };
-
+      const payload = { email, password };
       const res = await http.post("/customer/login", payload);
 
       if (res.data.token) {
-        // ✅ Simpan token & user info
         localStorage.setItem("token", res.data.token);
         localStorage.setItem("customer", JSON.stringify(res.data.customer));
 
@@ -58,25 +52,25 @@ const Login = ({ className = "", ...props }) => {
           },
         });
 
-        alert("✅ Login successful!");
+        alert("Login successful!");
         navigate(location.state?.redirectTo || "/", { replace: true });
       } else {
         alert(res.data.message || "Login failed. Check your credentials.");
       }
     } catch (error) {
       console.error("Login error:", error);
-      alert("❌ Failed to login. Please check your email/phone and password.");
+      alert("Failed to login. Please check your email and password.");
     } finally {
       setLoading(false);
     }
 
-    event.currentTarget.reset();
+    form.reset();
   };
 
-  // ✅ REGISTER CUSTOMER
   const handleSignUpSubmit = async (event) => {
     event.preventDefault();
-    const formData = new FormData(event.currentTarget);
+    const form = event.currentTarget;
+    const formData = new FormData(form);
     const name = (formData.get("name") || "").trim();
     const email = (formData.get("email") || "").trim();
     const password = (formData.get("password") || "").trim();
@@ -88,29 +82,23 @@ const Login = ({ className = "", ...props }) => {
 
     try {
       setLoading(true);
-
-      const payload = {
-        name,
-        email,
-        password,
-      };
-
+      const payload = { name, email, password };
       const res = await http.post("/customer/register", payload);
 
       if (res.status === 201) {
-        alert("🎉 Registration successful! Please login now.");
-        setMode("login"); // pindah ke form login
+        alert("Registration successful! Please login now.");
+        setMode("login");
       } else {
         alert(res.data.message || "Registration failed.");
       }
     } catch (error) {
       console.error("Register error:", error);
-      alert("❌ Failed to register. Please try again.");
+      alert("Failed to register. Please try again.");
     } finally {
       setLoading(false);
     }
 
-    event.currentTarget.reset();
+    form.reset();
   };
 
   const handleRegisterRedirect = () => setMode("register");
@@ -126,24 +114,18 @@ const Login = ({ className = "", ...props }) => {
         <div className="login-card__left">
           <div className="login-copy">
             <h1 className="login-title">
-              Hi, welcome{" "}
-              <span className="login-title__emoji" role="img" aria-label="waving hand">
-                👋
-              </span>
-              !
+              Hi, welcome <span className="login-title__emoji">??</span>!
             </h1>
             <p className="login-subtitle">
               New day, new arrivals. Sign in and find your dream product today!
             </p>
           </div>
 
-          {/* ✅ Form login/register */}
           <form
             className="login-form"
             autoComplete="off"
             onSubmit={isRegisterMode ? handleSignUpSubmit : handleLoginSubmit}
           >
-            {/* 👇 Tambahkan field nama hanya saat register */}
             {isRegisterMode && (
               <div className="form-group">
                 <label className="form-label" htmlFor="register-name">
@@ -183,13 +165,13 @@ const Login = ({ className = "", ...props }) => {
                 placeholder="Enter password..."
                 autoComplete="new-password"
               />
-              <div className="form-helper">
-                {!isRegisterMode && (
+              {!isRegisterMode && (
+                <div className="form-helper">
                   <button type="button" className="link-button" onClick={handleForgotPassword}>
                     Forgot Password?
                   </button>
-                )}
-              </div>
+                </div>
+              )}
             </div>
 
             <button type="submit" className="login-btn" disabled={loading}>
