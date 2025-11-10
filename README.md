@@ -1,33 +1,31 @@
-# 🛍️ TokoLokal
+## Nama Project : TokoLokal
 
 TokoLokal adalah website e-commerce yang dibangun menggunakan **React** (frontend) dan **Laravel** (backend).  
-Proyek ini dirancang untuk mempermudah proses jual-beli produk lokal dengan tampilan modern, user-friendly, dan sistem manajemen produk yang efisien.
+Proyek ini dirancang untuk mempermudah proses jual-beli produk lokal dengan tampilan yang modern.
 
 ---
 
-## 🚀 Fitur Utama
+## Fitur Utama
 
-- **Autentikasi Pengguna** — registrasi, login, logout dengan validasi backend.  
-- **Manajemen Produk** — CRUD produk lengkap (nama, gambar, deskripsi, harga, stok, varian).  
-- **Keranjang Belanja (Cart)** — tambah, hapus, dan update item secara real-time.  
-- **Checkout & Transaksi** — sistem checkout dengan konfirmasi dan histori pesanan.  
-- **Dashboard Admin (Filament)** — kelola data produk, pengguna, dan pesanan secara terpusat.  
-- **Responsif & Modern UI** — desain adaptif untuk desktop dan mobile.
-
+- **Autentikasi Pengguna**
+- **Manajemen Produk**
+- **Keranjang Belanja (Cart)** 
+- **Checkout & Transaksi**
+- **Dashboard Admin (Filament)**
+  
 ---
 
-## 🧰 Teknologi yang Digunakan
+## Tech Stack
 
 | Bagian | Teknologi |
 |--------|------------|
-| **Frontend** | React, Vite, Tailwind CSS, Axios |
+| **Frontend** | React, Vite, Tailwind CSS |
 | **Backend** | Laravel 11, Filament, MySQL |
 | **Autentikasi** | Laravel Sanctum |
-| **Deployment (opsional)** | Vercel (frontend) & Laravel Forge / VPS (backend) |
 
 ---
 
-## ⚙️ Instalasi & Setup
+## Instalasi & Setup Project
 
 ### 1. Clone Repository
 ```bash
@@ -58,7 +56,7 @@ dan frontend di `http://localhost:5173`
 
 ---
 
-## 📂 Struktur Direktori
+## Struktur Direktori
 
 ```
 TokoLokal/
@@ -76,7 +74,7 @@ TokoLokal/
 
 ---
 
-## 👥 Tim Pengembang
+## Tim Pengembang
 
 | Nama | Peran | Jobdesk |
 |------|--------|----------|
@@ -87,12 +85,12 @@ TokoLokal/
 
 ---
 
-## 📸 Preview Desain
+## Preview Desain
 
 *(Tambahkan di sini link ke Figma atau screenshot tampilan utama jika sudah ada)*
 
 ---
 
-## 🧾 Lisensi
+## Lisensi
 
 Proyek ini berada di bawah lisensi **MIT License** — bebas digunakan dan dimodifikasi dengan tetap mencantumkan kredit kepada pengembang asli.
