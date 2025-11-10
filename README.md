@@ -59,17 +59,84 @@ dan frontend di `http://localhost:5173`
 ## Struktur Direktori
 
 ```
-TokoLokal/
-├── backend/               # Laravel API (server)
-│   ├── app/
-│   ├── routes/
-│   ├── database/
-│   └── ...
-├── frontend/              # React client
-│   ├── src/
-│   ├── public/
-│   └── ...
-└── README.md
+.
+├─ app/
+│  ├─ Filament/
+│  │  └─ Pages/Auth/Login.php
+│  ├─ Http/
+│  │  └─ Controllers/Api/
+│  │     ├─ ProductController.php
+│  │     ├─ CartController.php
+│  │     ├─ CheckoutController.php
+│  │     ├─ CustomerProfileController.php
+│  │     ├─ CustomerAddressController.php
+│  │     ├─ CustomerPaymentMethodController.php
+│  │     ├─ CustomerSessionController.php
+│  │     ├─ VoucherController.php
+│  │     ├─ OrderController.php
+│  │     └─ SellerRegistrationController.php
+│  ├─ Models/
+│  │  ├─ Product.php
+│  │  └─ User.php
+│  └─ Providers/
+│     └─ Filament/AdminPanelProvider.php
+├─ bootstrap/
+├─ config/
+├─ database/
+│  ├─ migrations/
+│  └─ seeders/
+│     ├─ DatabaseSeeder.php
+│     ├─ UserSeeder.php
+│     ├─ ProductSeeder.php
+│     ├─ PaymentChannelSeeder.php
+│     ├─ VoucherSeeder.php
+│     └─ OrderDummySeeder.php
+├─ public/
+│  └─ storage -> ../storage/app/public
+├─ resources/
+│  ├─ js/
+│  │  ├─ core/api/
+│  │  │  ├─ axios.js
+│  │  │  ├─ product.api.js
+│  │  │  ├─ cart.api.js
+│  │  │  ├─ checkout.api.js
+│  │  │  ├─ customerProfile.api.js
+│  │  │  ├─ customerAddress.api.js
+│  │  │  ├─ customerPayment.api.js
+│  │  │  ├─ customerSession.api.js
+│  │  │  ├─ customerVoucher.api.js
+│  │  │  ├─ customerPassword.api.js
+│  │  │  └─ sellerAuth.api.js
+│  │  ├─ features/
+│  │  │  ├─ auth/pages/
+│  │  │  │  ├─ Login.jsx
+│  │  │  │  ├─ Register.jsx
+│  │  │  │  ├─ ForgotPassword.jsx
+│  │  │  │  ├─ ForgotPasswordReset.jsx
+│  │  │  │  └─ SellerLogin.jsx
+│  │  │  ├─ cart/pages/
+│  │  │  │  ├─ Cart.jsx
+│  │  │  │  └─ Checkout.jsx
+│  │  │  └─ profile/pages/
+│  │  │     ├─ AccountProfile.jsx
+│  │  │     └─ Vouchers.jsx
+│  │  ├─ components/
+│  │  │  ├─ navigation/Navbar.jsx
+│  │  │  └─ ui/ButtonProperty1Default.jsx
+│  │  └─ routes/index.jsx
+│  └─ assets/
+├─ routes/
+│  ├─ api.php
+│  └─ web.php
+├─ storage/
+├─ vendor/
+├─ artisan
+├─ composer.json
+├─ package.json
+├─ vite.config.js
+├─ phpunit.xml
+├─ jsconfig.json
+└─ README.md
 ```
 
 ---
