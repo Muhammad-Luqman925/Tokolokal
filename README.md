@@ -152,6 +152,5 @@ dan frontend di `http://localhost:5173`
 
 ---
 
-## Preview Desain
-
-*(Tambahkan di sini link ke Figma atau screenshot tampilan utama jika sudah ada)*
+## Preview Desain (Figma)
+https://www.figma.com/design/jhlqeUwaSG1pG9v88wX2uY/Lomba-iTech?node-id=0-1&t=4PEJuWBTtiO4bymq-1
