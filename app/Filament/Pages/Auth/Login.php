@@ -2,6 +2,7 @@
 
 namespace App\Filament\Pages\Auth;
 
+use Filament\Actions\Action;
 use Filament\Forms\Components\Component;
 use Filament\Forms\Components\TextInput;
 use Illuminate\Support\Str;
@@ -33,6 +34,19 @@ class Login extends \Filament\Pages\Auth\Login
             ->autofocus()
             ->autocomplete('username')
             ->extraInputAttributes(['tabindex' => 1]);
+    }
+
+    protected function getFormActions(): array
+    {
+        return [
+            $this->getAuthenticateFormAction(),
+            Action::make('back_to_site')
+                ->label('Back to Site')
+                ->icon('heroicon-m-arrow-uturn-left')
+                ->url(url('/'))
+                ->color('gray')
+                ->extraAttributes(['tabindex' => 3]),
+        ];
     }
 
     protected function getCredentialsFromFormData(array $data): array
