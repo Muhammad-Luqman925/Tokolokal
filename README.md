@@ -155,10 +155,3 @@ dan frontend di `http://localhost:5173`
 ## Preview Desain
 
 *(Tambahkan di sini link ke Figma atau screenshot tampilan utama jika sudah ada)*
-
----
-
-## Lisensi
-
-Proyek ini berada di bawah lisensi **MIT License** — bebas digunakan dan dimodifikasi dengan tetap mencantumkan kredit kepada pengembang asli.
->>>>>>> 715f2269e080ba6d207564aabab742cda01e5e38
