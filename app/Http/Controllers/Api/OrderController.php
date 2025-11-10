@@ -6,7 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\OrderItem;
+<<<<<<< HEAD
 use App\Models\CartItem;
+=======
+>>>>>>> 715f2269e080ba6d207564aabab742cda01e5e38
 use App\Models\Voucher;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
@@ -18,6 +21,7 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
+<<<<<<< HEAD
         // ✅ Validasi SUDAH DITAMBAH
         $request->validate([
             'address_id' => 'required|exists:customer_addresses,id',
@@ -29,6 +33,15 @@ class OrderController extends Controller
 
         $customer = $request->user();
         $cartItemIdsToDelete = [];
+=======
+        $request->validate([
+            'address_id' => 'required|exists:customer_addresses,id',
+            'orders' => 'required|array',
+        ]);
+
+        $customer = $request->user();
+
+>>>>>>> 715f2269e080ba6d207564aabab742cda01e5e38
         DB::beginTransaction();
         try {
             foreach ($request->orders as $orderData) {
@@ -40,18 +53,28 @@ class OrderController extends Controller
                     'seller_id'         => $orderData['seller_id'],
                     'address_id'        => $request->address_id,
                     'voucher_id'        => $request->voucher_id ?? null,
+<<<<<<< HEAD
                     'payment_method_id' => $request->payment_method_id, // 👈 SUDAH DITAMBAH
                     
                     // Ini masih ambil dari frontend (Nanti bisa di-improve)
+=======
+>>>>>>> 715f2269e080ba6d207564aabab742cda01e5e38
                     'subtotal'          => $orderData['subtotal'],
                     'shipping_cost'     => $orderData['shipping_cost'],
                     'discount'          => $orderData['discount'] ?? 0,
                     'grand_total'       => $orderData['grand_total'],
+<<<<<<< HEAD
 
                     'courier_name'      => $orderData['courier_name'],
                     'courier_service'   => $orderData['courier_service'],
                     'shipping_estimate' => $orderData['shipping_estimate'],
                     'status'            => 'pending', // Status awal
+=======
+                    'courier_name'      => $orderData['courier_name'],
+                    'courier_service'   => $orderData['courier_service'],
+                    'shipping_estimate' => $orderData['shipping_estimate'],
+                    'status'            => 'pending',
+>>>>>>> 715f2269e080ba6d207564aabab742cda01e5e38
                 ]);
 
                 foreach ($orderData['items'] as $item) {
@@ -60,6 +83,7 @@ class OrderController extends Controller
                         'product_id' => $item['product_id'],
                         'quantity'   => $item['quantity'],
                         'price'      => $item['price'],
+<<<<<<< HEAD
                         'subtotal'      => $item['quantity'] * $item['price'],
                         'note'       => $item['note'] ?? null,
                         'product_name' => $item['product_name'], // 👈 SUDAH DITAMBAH
@@ -68,6 +92,12 @@ class OrderController extends Controller
                 }
 
                 // Update voucher
+=======
+                        'total'      => $item['quantity'] * $item['price'],
+                    ]);
+                }
+
+>>>>>>> 715f2269e080ba6d207564aabab742cda01e5e38
                 if ($request->voucher_id) {
                     $voucher = Voucher::find($request->voucher_id);
                     if ($voucher) {
@@ -78,6 +108,7 @@ class OrderController extends Controller
                     }
                 }
             }
+<<<<<<< HEAD
             
             // 5. 🌟 HAPUS CART ITEMS SETELAH SEMUA BERHASIL 🌟
             if (!empty($cartItemIdsToDelete)) {
@@ -85,6 +116,9 @@ class OrderController extends Controller
                         ->whereIn('id', $cartItemIdsToDelete)
                         ->delete();
             }
+=======
+
+>>>>>>> 715f2269e080ba6d207564aabab742cda01e5e38
             DB::commit();
             return response()->json([
                 'success' => true,
@@ -100,9 +134,12 @@ class OrderController extends Controller
         }
     }
 
+<<<<<<< HEAD
     // ... (Sisa file kamu biarkan saja, sudah benar) ...
     // ... (index, show, addReview) ...
 
+=======
+>>>>>>> 715f2269e080ba6d207564aabab742cda01e5e38
     /**
      * 🔹 GET /api/orders - semua pesanan user
      */
@@ -166,4 +203,8 @@ class OrderController extends Controller
             'review' => $order->review,
         ]);
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 715f2269e080ba6d207564aabab742cda01e5e38

@@ -43,12 +43,16 @@ const CouponIcon = () => (
             strokeWidth="1.5"
             strokeLinecap="round"
         />
+<<<<<<< HEAD
         <path
             d="M14 9.5L10 15"
             stroke="#10131C"
             strokeWidth="1.5"
             strokeLinecap="round"
         />
+=======
+        <path d="M14 9.5L10 15" stroke="#10131C" strokeWidth="1.5" strokeLinecap="round" />
+>>>>>>> 715f2269e080ba6d207564aabab742cda01e5e38
         <circle cx="10" cy="9.5" r="1" fill="#10131C" />
         <circle cx="14" cy="15" r="1" fill="#10131C" />
     </svg>
@@ -67,6 +71,7 @@ const ArrowDownIcon = () => (
 
 const CheckIcon = () => (
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+<<<<<<< HEAD
         <circle
             cx="12"
             cy="12"
@@ -75,6 +80,9 @@ const CheckIcon = () => (
             strokeWidth="2"
             fill="white"
         />
+=======
+        <circle cx="12" cy="12" r="11" stroke="#3BA55C" strokeWidth="2" fill="white" />
+>>>>>>> 715f2269e080ba6d207564aabab742cda01e5e38
         <path
             d="M8 12.5L10.5 15L16 9"
             stroke="#3BA55C"
@@ -97,9 +105,13 @@ export const Checkout = ({ className = "" }) => {
     const [selectedVoucher, setSelectedVoucher] = useState(null);
     const [discountValue, setDiscountValue] = useState(0);
 
+<<<<<<< HEAD
     const pageClassName = ["checkout-page", className]
         .filter(Boolean)
         .join(" ");
+=======
+    const pageClassName = ["checkout-page", className].filter(Boolean).join(" ");
+>>>>>>> 715f2269e080ba6d207564aabab742cda01e5e38
 
     // 🔹 useMemo hitung total keseluruhan
     const summary = useMemo(() => {
@@ -116,6 +128,7 @@ export const Checkout = ({ className = "" }) => {
 
         const total = Math.max(totalBeforeDiscount - discountAmount, 0);
 
+<<<<<<< HEAD
         return {
             subtotal,
             shipping,
@@ -123,12 +136,16 @@ export const Checkout = ({ className = "" }) => {
             totalBeforeDiscount,
             total,
         };
+=======
+        return { subtotal, shipping, discountAmount, totalBeforeDiscount, total };
+>>>>>>> 715f2269e080ba6d207564aabab742cda01e5e38
     }, [orders, selectedVoucher]);
 
     // 🔹 Ambil data checkout + voucher + metode pembayaran
     useEffect(() => {
         const loadCheckout = async () => {
             try {
+<<<<<<< HEAD
                 const [resCheckout, resAddress, resPayments, resVouchers] =
                     await Promise.all([
                         CheckoutAPI.getPreview(),
@@ -136,12 +153,21 @@ export const Checkout = ({ className = "" }) => {
                         CustomerPaymentAPI.getAll(),
                         CustomerVoucherAPI.getAll(),
                     ]);
+=======
+                const [resCheckout, resAddress, resPayments, resVouchers] = await Promise.all([
+                    CheckoutAPI.getPreview(),
+                    CustomerAddressAPI.getActive(),
+                    CustomerPaymentAPI.getAll(),
+                    CustomerVoucherAPI.getAll(),
+                ]);
+>>>>>>> 715f2269e080ba6d207564aabab742cda01e5e38
 
                 setOrders(resCheckout.data.orders || []);
                 setAddress(resAddress?.address || null);
                 setPaymentMethods(resPayments?.data?.payment_methods || []);
 
                 // 🔹 Filter hanya voucher aktif & belum digunakan
+<<<<<<< HEAD
                 const allVouchers =
                     resVouchers.data?.vouchers || resVouchers.vouchers || [];
                 setVouchers(
@@ -152,6 +178,14 @@ export const Checkout = ({ className = "" }) => {
                 alert(
                     "Gagal memuat data checkout, alamat, atau metode pembayaran."
                 );
+=======
+                const allVouchers = resVouchers.data?.vouchers || resVouchers.vouchers || [];
+                setVouchers(allVouchers.filter(v => v.is_active && !v.pivot?.is_used));
+
+            } catch (error) {
+                console.error("Gagal memuat checkout data:", error);
+                alert("Gagal memuat data checkout, alamat, atau metode pembayaran.");
+>>>>>>> 715f2269e080ba6d207564aabab742cda01e5e38
             } finally {
                 setLoading(false);
             }
@@ -170,7 +204,11 @@ export const Checkout = ({ className = "" }) => {
         try {
             // Kalau belum pernah pakai, tandai di backend
             if (!voucher.pivot?.is_used) {
+<<<<<<< HEAD
                 await CustomerVoucherAPI.useVoucher(voucher.id);
+=======
+            await CustomerVoucherAPI.useVoucher(voucher.id);
+>>>>>>> 715f2269e080ba6d207564aabab742cda01e5e38
             }
 
             setSelectedVoucher(voucher);
@@ -178,7 +216,12 @@ export const Checkout = ({ className = "" }) => {
         } catch (err) {
             alert(err.response?.data?.message || "❌ Failed to apply voucher.");
         }
+<<<<<<< HEAD
     };
+=======
+        };
+
+>>>>>>> 715f2269e080ba6d207564aabab742cda01e5e38
 
     const handleShippingSelection = async (sellerId, option) => {
         try {
@@ -193,9 +236,13 @@ export const Checkout = ({ className = "" }) => {
                         ? {
                               ...order,
                               selected_shipping: res.data.selected_shipping,
+<<<<<<< HEAD
                               total:
                                   order.subtotal +
                                   res.data.selected_shipping.price,
+=======
+                              total: order.subtotal + res.data.selected_shipping.price,
+>>>>>>> 715f2269e080ba6d207564aabab742cda01e5e38
                           }
                         : order
                 )
@@ -207,21 +254,29 @@ export const Checkout = ({ className = "" }) => {
         setActiveShipping(null);
     };
     const handleCheckout = async () => {
+<<<<<<< HEAD
     // 1. Validasi (sudah benar)
+=======
+>>>>>>> 715f2269e080ba6d207564aabab742cda01e5e38
     if (!address) {
         alert("❌ Please select a delivery address first.");
         return;
     }
+<<<<<<< HEAD
     if (!selectedMethod) {
         alert("❌ Please select a payment method first.");
         return;
     }
+=======
+
+>>>>>>> 715f2269e080ba6d207564aabab742cda01e5e38
     if (orders.length === 0) {
         alert("❌ No items to checkout.");
         return;
     }
 
     try {
+<<<<<<< HEAD
         // 2. 🔹 Siapkan data untuk backend
         const payload = {
             // Data global
@@ -278,6 +333,52 @@ export const Checkout = ({ className = "" }) => {
         // 5. 🔹 Handle error
         console.error("Checkout failed:", error);
         alert(error.response?.data?.message || "Checkout failed due to an error.");
+=======
+        // 🔹 Siapkan data untuk backend
+        const payload = {
+            address_id: address.id,
+            voucher_id: selectedVoucher?.id || null,
+            orders: orders.map((o) => ({
+                seller_id: o.seller_id,
+                subtotal: o.subtotal,
+                shipping_cost: o.selected_shipping?.price || 0,
+                discount:
+                    selectedVoucher?.value_type === "percent"
+                        ? (o.subtotal * selectedVoucher.value) / 100
+                        : selectedVoucher?.value || 0,
+                grand_total:
+                    o.subtotal +
+                    (o.selected_shipping?.price || 0) -
+                    (selectedVoucher
+                        ? selectedVoucher.value_type === "percent"
+                            ? (o.subtotal * selectedVoucher.value) / 100
+                            : selectedVoucher.value
+                        : 0),
+                courier_name: o.selected_shipping?.name || "Unknown",
+                courier_service: o.selected_shipping?.service || "Standard",
+                shipping_estimate: o.selected_shipping?.estimate || "-",
+                items: o.items.map((i) => ({
+                    product_id: i.product_id,
+                    quantity: i.quantity,
+                    price: i.price,
+                })),
+            })),
+        };
+
+        // 🔹 Kirim ke backend
+        const res = await CheckoutAPI.create(payload);
+
+        if (res.data.success) {
+            alert("✅ Order placed successfully!");
+            // 🚀 Redirect ke halaman invoice/payment detail
+            window.location.href = `/profile/orders`; 
+        } else {
+            alert("❌ Failed to create order.");
+        }
+    } catch (error) {
+        console.error("Checkout failed:", error);
+        alert(error.response?.data?.message || "Checkout failed.");
+>>>>>>> 715f2269e080ba6d207564aabab742cda01e5e38
     }
 };
 
@@ -344,6 +445,7 @@ export const Checkout = ({ className = "" }) => {
                     </section>
 
                     {/* ITEMS */}
+<<<<<<< HEAD
                     {orders.map((order) => (
                         <section
                             key={order.seller_id}
@@ -512,6 +614,119 @@ export const Checkout = ({ className = "" }) => {
                         </section>
                     ))}
                 </section>
+=======
+{orders.map((order) => (
+  <section key={order.seller_id} className="checkout-card checkout-card--shop">
+    <header className="checkout-card__shop-header">
+      <h3>{order.store_name}</h3>
+    </header>
+
+    {order.items.map((item, i) => (
+      <article key={i} className="checkout-item-card">
+        <div className="checkout-item-card__selector">{/* optional checkbox */}</div>
+
+        <img
+          src={item.image}
+          alt={item.product}
+          className="checkout-item-card__image"
+          loading="lazy"
+        />
+
+        <div className="checkout-item-card__body">
+          <header>
+            <h3>{item.product}</h3>
+            <div className="checkout-item-card__meta">
+              Variant: {item.variant || "-"}
+            </div>
+          </header>
+
+          <div className="checkout-item-card__price-row">
+            <span className="checkout-item-card__quantity">
+              {item.quantity} x {formatCurrency(item.price)}
+            </span>
+          </div>
+
+          {/* 🟢 Add a Note Field */}
+          <div className="checkout-item-card__note">
+            <input
+              type="text"
+              placeholder="Add a note (optional)"
+              onChange={(e) => {
+                const value = e.target.value;
+                setOrders((prev) =>
+                  prev.map((ord) =>
+                    ord.seller_id === order.seller_id
+                      ? {
+                          ...ord,
+                          items: ord.items.map((it, idx) =>
+                            idx === i ? { ...it, note: value } : it
+                          ),
+                        }
+                      : ord
+                  )
+                );
+              }}
+              value={item.note || ""}
+            />
+          </div>
+
+          {/* 🔹 Shipping Section */}
+          <div className="checkout-item-card__shipping">
+            <label>Regular</label>
+            <button
+              type="button"
+              className="checkout-item-card__shipping-trigger"
+              onClick={() =>
+                setActiveShipping(
+                  activeShipping === order.seller_id ? null : order.seller_id
+                )
+              }
+            >
+              <span>
+                {order.selected_shipping.name} (
+                {formatCurrency(order.selected_shipping.price)})
+              </span>
+              <ArrowDownIcon />
+            </button>
+
+            <span className="checkout-item-card__shipping-estimate">
+              Delivery Estimate: {order.selected_shipping.estimate}
+            </span>
+
+            {activeShipping === order.seller_id && (
+              <ul className="checkout-item-card__shipping-menu" role="listbox">
+                {order.shipping_options.map((opt) => (
+                  <li key={opt.name}>
+                    <button
+                      type="button"
+                      onClick={() =>
+                        handleShippingSelection(order.seller_id, opt)
+                      }
+                    >
+                      <span>
+                        {opt.name} ({formatCurrency(opt.price)})
+                      </span>
+                      <small>Delivery Estimate: {opt.estimate}</small>
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        </div>
+      </article>
+    ))}
+
+    <footer className="checkout-item-card__footer">
+      <p className="checkout-item-card__total">
+        Total: <strong>{formatCurrency(order.total)}</strong>
+      </p>
+    </footer>
+  </section>
+))}
+
+</section>
+>>>>>>> 715f2269e080ba6d207564aabab742cda01e5e38
 
                 {/* ==================== */}
                 {/* SIDEBAR */}
@@ -527,9 +742,13 @@ export const Checkout = ({ className = "" }) => {
                                         <label
                                             className={[
                                                 "payment-option",
+<<<<<<< HEAD
                                                 selectedMethod === m.id
                                                     ? "payment-option--active"
                                                     : "",
+=======
+                                                selectedMethod === m.id ? "payment-option--active" : "",
+>>>>>>> 715f2269e080ba6d207564aabab742cda01e5e38
                                             ].join(" ")}
                                         >
                                             <img
@@ -543,26 +762,36 @@ export const Checkout = ({ className = "" }) => {
                                             </div>
                                             <input
                                                 type="radio"
+<<<<<<< HEAD
                                                 checked={
                                                     selectedMethod === m.id
                                                 }
                                                 onChange={() =>
                                                     setSelectedMethod(m.id)
                                                 }
+=======
+                                                checked={selectedMethod === m.id}
+                                                onChange={() => setSelectedMethod(m.id)}
+>>>>>>> 715f2269e080ba6d207564aabab742cda01e5e38
                                             />
                                         </label>
                                     </li>
                                 ))}
                             </ul>
                         ) : (
+<<<<<<< HEAD
                             <p className="text-gray-500">
                                 No payment methods available.
                             </p>
+=======
+                            <p className="text-gray-500">No payment methods available.</p>
+>>>>>>> 715f2269e080ba6d207564aabab742cda01e5e38
                         )}
 
                         {/* Voucher Section */}
                         {/* Voucher Section */}
                         <section className="checkout-voucher">
+<<<<<<< HEAD
                             <h3>Available Vouchers</h3>
 
                             {vouchers.length === 0 ? (
@@ -631,6 +860,52 @@ export const Checkout = ({ className = "" }) => {
                             )}
                         </section>
 
+=======
+                        <h3>Available Vouchers</h3>
+
+                        {vouchers.length === 0 ? (
+                            <p className="text-gray-500">No vouchers available.</p>
+                        ) : (
+                            vouchers.map((v) => {
+                            const isUsed = v.pivot?.is_used;
+                            const isActive = selectedVoucher?.id === v.id;
+
+                            return (
+                                <div
+                                key={v.id}
+                                className={`voucher-item ${isUsed ? "used" : isActive ? "active" : ""}`}
+                                >
+                                <div className="voucher-info">
+                                    <strong>{v.title}</strong>
+                                    <p>{v.description}</p>
+                                    <small>
+                                    {v.value_type === "percent"
+                                        ? `${v.value}% off`
+                                        : `Rp ${v.value.toLocaleString("id-ID")}`}
+                                    </small>
+                                </div>
+
+                                <button
+                                    disabled={isUsed}
+                                    onClick={() => handleUseVoucher(v)}
+                                    className={`voucher-btn ${isUsed ? "disabled" : isActive ? "selected" : ""}`}
+                                >
+                                    {isUsed ? "Used" : isActive ? "Applied" : "Use"}
+                                </button>
+                                </div>
+                            );
+                            })
+                        )}
+
+                        {selectedVoucher && (
+                            <p className="applied-voucher">
+                            ✅ Voucher <strong>{selectedVoucher.title}</strong> applied!
+                            </p>
+                        )}
+                        </section>
+
+
+>>>>>>> 715f2269e080ba6d207564aabab742cda01e5e38
                         {/* Summary */}
                         <section className="checkout-summary">
                             <h3>Transaction Summary</h3>
@@ -646,12 +921,16 @@ export const Checkout = ({ className = "" }) => {
                                 {selectedVoucher && (
                                     <div>
                                         <dt>Discount</dt>
+<<<<<<< HEAD
                                         <dd>
                                             -
                                             {formatCurrency(
                                                 summary.discountAmount
                                             )}
                                         </dd>
+=======
+                                        <dd>-{formatCurrency(summary.discountAmount)}</dd>
+>>>>>>> 715f2269e080ba6d207564aabab742cda01e5e38
                                     </div>
                                 )}
                                 <div className="summary-total">
@@ -661,10 +940,17 @@ export const Checkout = ({ className = "" }) => {
                             </dl>
 
                             <ButtonProperty1Default
+<<<<<<< HEAD
                                 text="Buy Now"
                                 className="checkout-summary__btn"
                                 onClick={handleCheckout}
                             />
+=======
+                                    text="Buy Now"
+                                    className="checkout-summary__btn"
+                                    onClick={handleCheckout}
+                                />
+>>>>>>> 715f2269e080ba6d207564aabab742cda01e5e38
                         </section>
                     </section>
                 </aside>

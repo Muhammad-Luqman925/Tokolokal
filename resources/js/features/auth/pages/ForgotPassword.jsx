@@ -56,9 +56,13 @@ const ForgotPassword = ({ className = "", ...props }) => {
 
     // 🔹 Redirect ke register seller
     const handleSignUp = () => {
+<<<<<<< HEAD
         navigate("/seller/register", {
             state: { source: "forgot-password", contactMethod: "phone" },
         });
+=======
+        navigate("/seller/register");
+>>>>>>> 715f2269e080ba6d207564aabab742cda01e5e38
     };
 
     return (

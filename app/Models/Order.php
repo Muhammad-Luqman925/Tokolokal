@@ -29,7 +29,11 @@ class Order extends Model
     }
 
     public function customer() {
+<<<<<<< HEAD
         return $this->belongsTo(Customer::class, 'customer_id');
+=======
+        return $this->belongsTo(User::class, 'customer_id');
+>>>>>>> 715f2269e080ba6d207564aabab742cda01e5e38
     }
 
     public function seller() {

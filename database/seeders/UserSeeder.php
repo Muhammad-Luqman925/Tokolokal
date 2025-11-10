@@ -10,8 +10,11 @@ class UserSeeder extends Seeder
 {
     public function run(): void
     {
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 715f2269e080ba6d207564aabab742cda01e5e38
         // 🏪 Seller (Toko)
         User::create([
             'name' => 'Luqman Store Owner',

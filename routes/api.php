@@ -10,6 +10,10 @@ use App\Http\Controllers\Api\CustomerPaymentMethodController;
 use App\Http\Controllers\Api\VoucherController;
 use App\Http\Controllers\Api\CustomerSessionController;
 use App\Http\Controllers\Api\OrderController;
+<<<<<<< HEAD
+=======
+use App\Http\Controllers\Api\SellerRegistrationController;
+>>>>>>> 715f2269e080ba6d207564aabab742cda01e5e38
 // 🔹 Tes sederhana
 Route::get('/test', function () {
     return response()->json(['message' => 'API is working!']);
@@ -19,6 +23,10 @@ Route::post('/customer/register', [CustomerAuthController::class, 'register']);
 Route::post('/customer/login', [CustomerAuthController::class, 'login']);
 Route::post('/customer/check-email', [CustomerAuthController::class, 'checkEmail']);
 Route::post('/customer/reset-password', [CustomerAuthController::class, 'resetPassword']);
+<<<<<<< HEAD
+=======
+Route::post('/seller/register', [SellerRegistrationController::class, 'store']);
+>>>>>>> 715f2269e080ba6d207564aabab742cda01e5e38
 Route::middleware('auth:sanctum')->group(function () {
         Route::post('/logout', [CustomerAuthController::class, 'logout']);
         Route::post('/change-password', [CustomerAuthController::class, 'changePassword']);
@@ -103,4 +111,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/orders/{order_code}', [OrderController::class, 'show'])->name('orders.show');
     Route::patch('/orders/{id}/status', [OrderController::class, 'updateStatus'])->name('orders.updateStatus');
     Route::post('/checkout', [OrderController::class, 'store']);
+<<<<<<< HEAD
 });
+=======
+});
+>>>>>>> 715f2269e080ba6d207564aabab742cda01e5e38

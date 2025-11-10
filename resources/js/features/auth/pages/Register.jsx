@@ -1,4 +1,5 @@
 import "@/assets/styles/pages/Register.css";
+<<<<<<< HEAD
 import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { ButtonProperty1Default } from "@/components/ui/ButtonProperty1Default";
@@ -43,6 +44,59 @@ const Register = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
         navigate("/seller/login");
+=======
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { ButtonProperty1Default } from "@/components/ui/ButtonProperty1Default";
+import ConfirmLeaveModal from "../components/ConfirmLeaveModal";
+import SellerAuthAPI from "@/core/api/sellerAuth.api";
+
+const Register = () => {
+    const navigate = useNavigate();
+    const [showConfirmLeave, setShowConfirmLeave] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+
+        const formData = new FormData(event.currentTarget);
+        const storeName = (formData.get("store_name") || "").trim();
+        const email = (formData.get("email") || "").trim();
+        const password = (formData.get("password") || "").trim();
+        const confirmPassword = (formData.get("confirmPassword") || "").trim();
+
+        if (!email || !password || !confirmPassword) {
+            alert("Please fill in all required fields.");
+            return;
+        }
+
+        if (password !== confirmPassword) {
+            alert("Password and confirmation do not match.");
+            return;
+        }
+
+        const payload = {
+            store_name: storeName || null,
+            email,
+            password,
+        };
+
+        setIsSubmitting(true);
+        try {
+            await SellerAuthAPI.register(payload);
+            alert("Registration successful! Please login.");
+            navigate("/admin/login");
+        } catch (error) {
+            const backendErrors = error.response?.data?.errors;
+            const firstError =
+                (backendErrors && Object.values(backendErrors)[0]?.[0]) ||
+                error.response?.data?.message ||
+                "Failed to register seller.";
+            alert(firstError);
+        } finally {
+            setIsSubmitting(false);
+        }
+>>>>>>> 715f2269e080ba6d207564aabab742cda01e5e38
     };
 
     const handleClose = () => {
@@ -58,8 +112,11 @@ const Register = () => {
         navigate(-1);
     };
 
+<<<<<<< HEAD
     const activeOption = CONTACT_OPTIONS.find((option) => option.id === contactMethod) ?? CONTACT_OPTIONS[0];
 
+=======
+>>>>>>> 715f2269e080ba6d207564aabab742cda01e5e38
     return (
         <div className="seller-register-page">
             <button type="button" className="close-button" aria-label="Close" onClick={handleClose}>
@@ -77,6 +134,7 @@ const Register = () => {
             <section className="seller-register-card" aria-label="Register your Tokolokal store">
                 <header className="seller-register-card__header">
                     <h2>Register Your Store</h2>
+<<<<<<< HEAD
                     <div className="seller-register-card__toggle" role="tablist" aria-label="Choose registration method">
                         {CONTACT_OPTIONS.map((option) => (
                             <button
@@ -103,6 +161,32 @@ const Register = () => {
                             autoComplete="off"
                         />
                     </label>
+=======
+                </header>
+
+                <form className="seller-register-card__form" autoComplete="off" onSubmit={handleSubmit}>
+                    <label className="seller-register-field" htmlFor="register-store-name">
+                        <span>Store Name</span>
+                        <input
+                            id="register-store-name"
+                            name="store_name"
+                            type="text"
+                            placeholder="Enter your store name..."
+                            autoComplete="off"
+                        />
+                    </label>
+                    <label className="seller-register-field" htmlFor="register-email">
+                        <span>Email</span>
+                        <input
+                            id="register-email"
+                            name="email"
+                            type="email"
+                            placeholder="Insert email..."
+                            autoComplete="off"
+                            required
+                        />
+                    </label>
+>>>>>>> 715f2269e080ba6d207564aabab742cda01e5e38
 
                     <label className="seller-register-field" htmlFor="register-password">
                         <span>Password</span>
@@ -126,7 +210,16 @@ const Register = () => {
                         />
                     </label>
 
+<<<<<<< HEAD
                     <ButtonProperty1Default type="submit" text="Register" className="seller-register-card__submit" />
+=======
+                    <ButtonProperty1Default
+                        type="submit"
+                        text={isSubmitting ? "Registering..." : "Register"}
+                        className="seller-register-card__submit"
+                        disabled={isSubmitting}
+                    />
+>>>>>>> 715f2269e080ba6d207564aabab742cda01e5e38
                 </form>
             </section>
 

@@ -124,6 +124,7 @@ export const ProductPreview = ({ className = "" }) => {
     if (loading) return <p className="loading-state">Memuat produk...</p>;
     if (!product) return <p className="error-state">Produk tidak ditemukan.</p>;
     const handleAddToCart = async () => {
+<<<<<<< HEAD
     const token = localStorage.getItem("token");
 
     if (!token) {
@@ -156,6 +157,31 @@ export const ProductPreview = ({ className = "" }) => {
     }
 };
 
+=======
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+            alert("⚠️ Kamu belum login. Silakan login dulu sebelum menambah produk.");
+            return;
+        }
+
+        try {
+            const payload = {
+            product_id: Number(id), // ✅ pastikan integer
+            quantity: Number(quantity),
+            note: "",
+            variant: selectedVariant || "-", // ✅ kalau belum dipilih, kasih tanda "-"
+            };
+
+            const res = await CartAPI.add(payload);
+            alert("✅ Produk berhasil ditambahkan ke keranjang!");
+            console.log("Cart response:", res.data);
+        } catch (err) {
+            console.error("Gagal menambah produk:", err.response?.data || err.message);
+            alert("❌ Gagal menambah produk. Pastikan kamu sudah login.");
+        }
+        };
+>>>>>>> 715f2269e080ba6d207564aabab742cda01e5e38
 
     const pageClassName = ["preview-perproduk", className]
         .filter(Boolean)

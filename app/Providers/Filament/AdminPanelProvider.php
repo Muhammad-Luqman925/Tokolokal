@@ -2,6 +2,10 @@
 
 namespace App\Providers\Filament;
 
+<<<<<<< HEAD
+=======
+use App\Filament\Pages\Auth\Login as FilamentPhoneLogin;
+>>>>>>> 715f2269e080ba6d207564aabab742cda01e5e38
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -26,7 +30,11 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('admin')
             ->path('admin')
+<<<<<<< HEAD
             ->login()
+=======
+            ->login(FilamentPhoneLogin::class)
+>>>>>>> 715f2269e080ba6d207564aabab742cda01e5e38
             ->colors([
                 'primary' => Color::Amber,
             ])

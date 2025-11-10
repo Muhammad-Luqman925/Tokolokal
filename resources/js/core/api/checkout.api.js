@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /**
  * 1. IMPORT DULU 'http' (axios instance) kamu
  */
@@ -20,3 +21,14 @@ const CheckoutAPI = {
 };
 
 export default CheckoutAPI;
+=======
+import http from "./axios";
+
+const CheckoutAPI = {
+  getPreview: () => http.get("/checkout/preview"),
+  updateShipping: (data) => http.post("/checkout/update-shipping", data),
+  create: (data) => api.post("/orders", data),
+};
+
+export default CheckoutAPI;
+>>>>>>> 715f2269e080ba6d207564aabab742cda01e5e38

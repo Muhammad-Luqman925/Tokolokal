@@ -25,6 +25,10 @@ import Notifications from "@/features/profile/pages/Notifications";
 import Privacy from "@/features/profile/pages/Privacy";
 import ForgotPassword from "@/features/auth/pages/ForgotPassword";
 import ForgotPasswordReset from "@/features/auth/pages/ForgotPasswordReset";
+<<<<<<< HEAD
+=======
+import ExternalRedirect from "./ExternalRedirect";
+>>>>>>> 715f2269e080ba6d207564aabab742cda01e5e38
 
 const routes = [
     {
@@ -48,6 +52,21 @@ const routes = [
         element: <SellerLogin />,
     },
     {
+<<<<<<< HEAD
+=======
+        path: "/admin/login",
+        element: <ExternalRedirect to="/admin/login" />,
+    },
+    {
+        path: "/admin",
+        element: <ExternalRedirect to="/admin" />,
+    },
+    {
+        path: "/login-admin",
+        element: <ExternalRedirect to="/login-admin" />,
+    },
+    {
+>>>>>>> 715f2269e080ba6d207564aabab742cda01e5e38
         path: "/seller/register",
         element: <Register />,
     },
@@ -148,9 +167,12 @@ const routes = [
 ];
 
 export default routes;
+<<<<<<< HEAD
 
 
 
 
 
 
+=======
+>>>>>>> 715f2269e080ba6d207564aabab742cda01e5e38

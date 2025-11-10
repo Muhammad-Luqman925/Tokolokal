@@ -9,9 +9,13 @@ use App\Services\ShippingService;
 
 class CheckoutController extends Controller
 {
+<<<<<<< HEAD
     // ------------------------------------
     // PREVIEW CHECKOUT
     // ------------------------------------
+=======
+    // PREVIEW CHECKOUT
+>>>>>>> 715f2269e080ba6d207564aabab742cda01e5e38
     public function preview(Request $request)
     {
         $customer = $request->user();
@@ -21,7 +25,10 @@ class CheckoutController extends Controller
 
         $cartItems = CartItem::with('product.user')
             ->where('customer_id', $customer->id)
+<<<<<<< HEAD
             // ->where('is_selected', true) // <-- Opsional: Nanti kalau mau checkout sebagian
+=======
+>>>>>>> 715f2269e080ba6d207564aabab742cda01e5e38
             ->get();
 
         if ($cartItems->isEmpty()) {
@@ -29,7 +36,11 @@ class CheckoutController extends Controller
         }
 
         // Group berdasarkan toko (user_id)
+<<<<<<< HEAD
         $grouped = $cartItems->groupBy(fn ($item) => $item->product->user_id);
+=======
+        $grouped = $cartItems->groupBy(fn($item) => $item->product->user_id);
+>>>>>>> 715f2269e080ba6d207564aabab742cda01e5e38
         $shippingOptions = ShippingService::getAll();
         $orders = [];
         $grandTotal = 0;
@@ -39,7 +50,11 @@ class CheckoutController extends Controller
             $storeName = $store->store_name ?? 'Toko Tidak Dikenal';
 
             // Subtotal barang
+<<<<<<< HEAD
             $subtotal = $items->sum(fn ($i) => $i->product->price * $i->quantity);
+=======
+            $subtotal = $items->sum(fn($i) => $i->product->price * $i->quantity);
+>>>>>>> 715f2269e080ba6d207564aabab742cda01e5e38
 
             // Default ekspedisi
             $defaultShipping = $shippingOptions[0];
@@ -53,6 +68,7 @@ class CheckoutController extends Controller
                 'selected_shipping' => $defaultShipping, // <— ekspedisi aktif
                 'shipping_options' => $shippingOptions, // <— list pilihan
                 'total' => $total,
+<<<<<<< HEAD
 
                 // 🌟🌟🌟 INI DIA PERBAIKANNYA 🌟🌟🌟
                 'items' => $items->map(fn ($i) => [
@@ -60,12 +76,19 @@ class CheckoutController extends Controller
                     'product_id' => $i->product_id,    // 👈 KITA TAMBAHKAN INI
                     
                     'product_name' => $i->product->name, // 👈 Kita ganti nama 'product'
+=======
+                'items' => $items->map(fn($i) => [
+                    'product' => $i->product->name,
+>>>>>>> 715f2269e080ba6d207564aabab742cda01e5e38
                     'variant' => $i->variant,
                     'quantity' => $i->quantity,
                     'price' => $i->product->price,
                     'image' => $i->product->image ?? null,
+<<<<<<< HEAD
                     'note' => $i->note ?? null,
                     'cart_item_id' => $i->id,     // 👈 Kita tambahkan note juga
+=======
+>>>>>>> 715f2269e080ba6d207564aabab742cda01e5e38
                 ]),
             ];
         }
@@ -77,9 +100,13 @@ class CheckoutController extends Controller
         ]);
     }
 
+<<<<<<< HEAD
     // ------------------------------------
     // UPDATE SHIPPING TIAP TOKO
     // ------------------------------------
+=======
+    // UPDATE SHIPPING TIAP TOKO
+>>>>>>> 715f2269e080ba6d207564aabab742cda01e5e38
     public function updateShipping(Request $request)
     {
         $data = $request->validate([
@@ -100,4 +127,8 @@ class CheckoutController extends Controller
             'selected_shipping' => $shipping,
         ]);
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 715f2269e080ba6d207564aabab742cda01e5e38
