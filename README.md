@@ -8,10 +8,24 @@ Proyek ini dirancang untuk mempermudah proses jual-beli produk lokal dengan tamp
 ## Fitur Utama
 
 - **Autentikasi Pengguna**
+
+Fitur yang memungkinkan pengguna untuk mendaftar, masuk (login), dan mengelola sesi akun secara aman menggunakan Laravel Sanctum.
+  
 - **Manajemen Produk**
-- **Keranjang Belanja (Cart)** 
+
+Fitur bagi Admin/Seller untuk mengelola daftar produk, termasuk menambah, mengubah, menghapus, dan menampilkan produk. Informasi yang dikelola mencakup nama, harga, deskripsi, kategori, stok, serta unggahan gambar produk.
+  
+- **Keranjang Belanja (Cart)**
+
+Pengguna dapat menambahkan produk ke keranjang, melihat daftar item yang tersimpan, serta mengetahui total harga keseluruhan. Dari halaman keranjang, pengguna dapat melanjutkan proses ke tahap pembelian (checkout).
+
 - **Checkout & Transaksi**
+
+Pengguna dapat memilih satu atau beberapa produk untuk dibeli sekaligus, memilih metode pembayaran, serta melihat rincian total harga dari pesanan yang akan diproses.
+
 - **Dashboard Admin (Filament)**
+
+Menyediakan sistem administrasi berbasis Filament yang memungkinkan Admin/Seller melakukan pengelolaan data secara penuh melalui operasi CRUD terhadap produk yang mereka miliki.
   
 ---
 
